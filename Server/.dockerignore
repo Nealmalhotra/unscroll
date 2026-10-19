@@ -1,0 +1,5 @@
+data
+.tmp-test-*
+test
+node_modules
+.git

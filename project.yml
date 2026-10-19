@@ -1,0 +1,156 @@
+name: Unscroll
+options:
+  bundleIdPrefix: org.unscroll
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    DEVELOPMENT_TEAM: ${DEVELOPMENT_TEAM}
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    TARGETED_DEVICE_FAMILY: "1"
+packages:
+  UnscrollKit:
+    path: Packages/UnscrollKit
+
+targets:
+  Unscroll:
+    type: application
+    platform: iOS
+    sources: [App/Sources, App/Resources]
+    dependencies:
+      - package: UnscrollKit
+        product: UnscrollKit
+      - package: UnscrollKit
+        product: UnscrollScreenTime
+      - target: UnscrollMonitor
+      - target: UnscrollShieldConfiguration
+      - target: UnscrollShieldAction
+      - target: UnscrollReport
+    entitlements:
+      path: App/Unscroll.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.org.unscroll.shared]
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Unscroll
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+  UnscrollMonitor:
+    type: app-extension
+    platform: iOS
+    sources: [Extensions/Monitor]
+    dependencies:
+      - package: UnscrollKit
+        product: UnscrollKit
+      - package: UnscrollKit
+        product: UnscrollScreenTime
+    entitlements:
+      path: Extensions/Monitor/Monitor.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.org.unscroll.shared]
+    info:
+      path: Extensions/Monitor/Info.plist
+      properties:
+        CFBundleDisplayName: Unscroll Monitor
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.deviceactivity.monitor-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).MonitorExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.monitor
+
+  UnscrollShieldConfiguration:
+    type: app-extension
+    platform: iOS
+    sources: [Extensions/ShieldConfiguration]
+    dependencies:
+      - package: UnscrollKit
+        product: UnscrollKit
+      - package: UnscrollKit
+        product: UnscrollScreenTime
+    entitlements:
+      path: Extensions/ShieldConfiguration/ShieldConfiguration.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.org.unscroll.shared]
+    info:
+      path: Extensions/ShieldConfiguration/Info.plist
+      properties:
+        CFBundleDisplayName: Unscroll Shield
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettingsUI.shield-configuration-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldConfigurationExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.shieldconfiguration
+
+  UnscrollShieldAction:
+    type: app-extension
+    platform: iOS
+    sources: [Extensions/ShieldAction]
+    dependencies:
+      - package: UnscrollKit
+        product: UnscrollKit
+      - package: UnscrollKit
+        product: UnscrollScreenTime
+    entitlements:
+      path: Extensions/ShieldAction/ShieldAction.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.org.unscroll.shared]
+    info:
+      path: Extensions/ShieldAction/Info.plist
+      properties:
+        CFBundleDisplayName: Unscroll Shield Action
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettings.shield-action-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldActionExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.shieldaction
+
+  UnscrollReport:
+    type: extensionkit-extension
+    platform: iOS
+    sources: [Extensions/Report]
+    dependencies:
+      - package: UnscrollKit
+        product: UnscrollKit
+    entitlements:
+      path: Extensions/Report/Report.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.org.unscroll.shared]
+    info:
+      path: Extensions/Report/Info.plist
+      properties:
+        CFBundleDisplayName: Unscroll Report
+        EXAppExtensionAttributes:
+          EXExtensionPointIdentifier: com.apple.deviceactivityui.report-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.report
+        # Apple's DeviceActivityReportScene isn't Swift 6 concurrency-clean yet.
+        SWIFT_VERSION: "5.0"
+
+schemes:
+  Unscroll:
+    build:
+      targets:
+        Unscroll: all
+    run:
+      config: Debug
