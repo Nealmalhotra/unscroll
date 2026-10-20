@@ -23,6 +23,7 @@
 | Real-life rewards | ✅ Define your own rewards ("movie night: 500 pts") and redeem XP points. No partner deals |
 | Mindless-scrolling alerts | ✅ Hourly "Still scrolling?" notifications from the monitor extension |
 | Screen time reports | ✅ `DeviceActivityReport` extension with total time, pickups and per-app list, plus a 7-day goal chart |
+| Streak widget (home and lock screen) | ✅ Small and medium home-screen widgets, plus circular, rectangular and inline lock-screen widgets |
 | Onboarding quiz, "years of your life" shock and reframe | ✅ Without the paywall |
 | Tip of the day and well-being articles | ✅ Focus, sleep, ADHD, mental health, relationships |
 
@@ -41,7 +42,7 @@
    DeviceActivityReport ext    ── private per-app usage UI
 ```
 
-* **`Packages/UnscrollKit`**: platform-independent core: models, a pure reducer (`AppState.applying/endingSession/finalizingDays…`), XP/streak/quest/league engines and file persistence. 73 tests with about 95% line coverage.
+* **`Packages/UnscrollKit`**: platform-independent core: models, a pure reducer (`AppState.applying/endingSession/finalizingDays…`), XP/streak/quest/league engines and file persistence. 74 tests with about 95% line coverage.
 * **`UnscrollScreenTime`** (same package, iOS only): FamilyControls/ManagedSettings/DeviceActivity glue shared by the app and the extensions.
 * **`App/`**: the SwiftUI app. **`Extensions/`**: the four Screen Time extensions, each a thin shim over the package.
 * **`Server/`**: an optional, zero-dependency Node server for real leaderboards and groups (46 tests). See [Server/README.md](Server/README.md).

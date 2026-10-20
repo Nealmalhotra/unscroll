@@ -76,4 +76,22 @@ struct FinalizerTests {
         #expect(state.days[Fixtures.day]?.goalMinutes == 45)
         #expect(state.profile.dailyGoalMinutes == 45)
     }
+
+    @Test func widgetSummaryCountsYesterdayBeforeTheAppFinalizesIt() {
+        let yesterday = Fixtures.day.adding(days: -1, calendar: cal)
+        let twoAgo = Fixtures.day.adding(days: -2, calendar: cal)
+        let state = AppState(profile: Profile(dailyGoalMinutes: 100), days: [
+            twoAgo: Fixtures.successfulDay(twoAgo),
+            yesterday: DayRecord(day: yesterday, goalMinutes: 100, screenMinutesAtLeast: 60),
+        ])
+        let summary = state.widgetSummary(now: Fixtures.date(hour: 9), calendar: cal)
+        #expect(summary.streak == 2)
+        #expect(summary.todayOnTrack)
+        #expect(summary.goalMinutes == 100)
+        #expect(summary.goalRemainingFraction == 1)
+        #expect(summary.level >= 1)
+        // Pure: the original state is untouched.
+        #expect(state.days[yesterday]?.finalized == false)
+        #expect(WidgetSummary.placeholder.goalRemainingFraction > 0)
+    }
 }

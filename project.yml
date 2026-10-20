@@ -30,6 +30,7 @@ targets:
       - target: UnscrollShieldConfiguration
       - target: UnscrollShieldAction
       - target: UnscrollReport
+      - target: UnscrollWidget
     entitlements:
       path: App/Unscroll.entitlements
       properties:
@@ -42,6 +43,9 @@ targets:
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         ITSAppUsesNonExemptEncryption: false
+        CFBundleURLTypes:
+          - CFBundleURLName: com.nealmalhotra.unscroll
+            CFBundleURLSchemes: [unscroll]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app
@@ -146,6 +150,27 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app.report
         # Apple's DeviceActivityReportScene isn't Swift 6 concurrency-clean yet.
         SWIFT_VERSION: "5.0"
+
+  UnscrollWidget:
+    type: app-extension
+    platform: iOS
+    sources: [Extensions/Widget]
+    dependencies:
+      - package: UnscrollKit
+        product: UnscrollKit
+    entitlements:
+      path: Extensions/Widget/Widget.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.nealmalhotra.unscroll]
+    info:
+      path: Extensions/Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Unscroll Widget
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app.widget
 
 schemes:
   Unscroll:

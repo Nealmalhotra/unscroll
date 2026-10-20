@@ -2,6 +2,7 @@ import Foundation
 import Observation
 import os
 import UnscrollKit
+import WidgetKit
 
 /// The single source of truth for the UI. Holds an immutable `AppState` snapshot and
 /// replaces it wholesale on every change, then persists and syncs side effects.
@@ -85,6 +86,7 @@ final class AppModel {
         do {
             try await store.save(next)
             try SharedConfig.file().save(SharedConfig(state: next, trackingSelectionData: trackingSelection))
+            WidgetCenter.shared.reloadAllTimelines()
             return true
         } catch {
             log.error("Save failed: \(error.localizedDescription, privacy: .public)")
