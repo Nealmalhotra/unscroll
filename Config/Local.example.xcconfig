@@ -1,0 +1,10 @@
+// Copy to Config/Local.xcconfig and fill in, or run ./scripts/setup.sh to do it for you.
+
+// Find it in Xcode › Settings › Accounts, or at developer.apple.com › Membership.
+DEVELOPMENT_TEAM = ABCDE12345
+
+// Must be unique to you.
+BUNDLE_ID_PREFIX = com.yourname.unscroll
+
+// Optional: defaults to group.$(BUNDLE_ID_PREFIX)
+// APP_GROUP = group.com.yourname.unscroll

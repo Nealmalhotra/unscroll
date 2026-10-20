@@ -27,5 +27,7 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).ShieldConfigurationExtension</string>
 	</dict>
+	<key>UnscrollAppGroup</key>
+	<string>$(APP_GROUP)</string>
 </dict>
 </plist>

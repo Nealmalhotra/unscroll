@@ -25,17 +25,48 @@ It's built on Apple's Screen Time API. Your usage data stays on your phone.
 
 ## Getting started
 
-You need Xcode 16 or later, an iPhone on iOS 17+, a **paid** Apple Developer account (Apple doesn't allow the Screen Time permission on free accounts), and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+You need:
+
+- Xcode 16 or later
+- An iPhone on iOS 17+
+- A **paid** Apple Developer account (Apple doesn't allow the Screen Time permission on free accounts), signed in under Xcode › Settings › Accounts
 
 ```bash
-brew install xcodegen
-DEVELOPMENT_TEAM=<your team id> xcodegen generate
+git clone https://github.com/Nealmalhotra/unscroll.git
+cd unscroll
+./scripts/setup.sh
 open Unscroll.xcodeproj
 ```
 
-Then select your iPhone and press **Run**. If the bundle IDs are taken, change `bundleIdPrefix`, the `PRODUCT_BUNDLE_IDENTIFIER`s and the App Group in `project.yml`, and update `SharedContainer.appGroupID` to match.
+Then select your iPhone and press **Run**.
+
+`setup.sh` installs XcodeGen if needed and finds your team in Xcode. It writes your settings to `Config/Local.xcconfig` (gitignored) and generates the Xcode project. Bundle IDs default to `com.<teamid>.unscroll.*`, so they never clash with anyone else's.
+
+### Configuration
+
+All personal settings live in **`Config/Local.xcconfig`**, which works like a `.env` file for the iOS app. Template: [`Config/Local.example.xcconfig`](Config/Local.example.xcconfig).
+
+| Variable | Description |
+|---|---|
+| `DEVELOPMENT_TEAM` | Your Apple Developer Team ID |
+| `BUNDLE_ID_PREFIX` | Prefix for the app's bundle IDs, e.g. `com.yourname.unscroll` |
+| `APP_GROUP` | App Group shared by the app, extensions and widget. Defaults to `group.<BUNDLE_ID_PREFIX>` |
+
+After editing it, run `xcodegen generate` (or `./scripts/setup.sh`) again.
 
 App blocking only works on a real device. To browse the UI in the Simulator with sample data, launch with the `-demo` argument.
+
+### Server (optional)
+
+Real leaderboards and groups use a small self-hosted server:
+
+```bash
+cd Server
+cp .env.example .env   # PORT, DATA_FILE, ADMIN_TOKEN…
+npm start
+```
+
+Then in the app, go to **Profile › Social server** and enter its URL. See [Server/README.md](Server/README.md).
 
 ## Project layout
 

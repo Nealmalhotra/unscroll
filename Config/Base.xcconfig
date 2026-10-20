@@ -1,0 +1,14 @@
+// Shared build settings. Don't edit this file for your own setup:
+// copy Local.example.xcconfig to Local.xcconfig (or run ./scripts/setup.sh) and edit that.
+
+// Your Apple Developer Team ID (paid account required for Screen Time).
+DEVELOPMENT_TEAM =
+
+// Prefix for all bundle IDs. Must be unique to you, e.g. com.yourname.unscroll
+BUNDLE_ID_PREFIX = org.unscroll
+
+// App Group shared by the app, its extensions and the widget.
+APP_GROUP = group.$(BUNDLE_ID_PREFIX)
+
+// Personal overrides (gitignored). The `?` makes the include optional.
+#include? "Local.xcconfig"

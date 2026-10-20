@@ -1,3 +1,4 @@
 data/
 .tmp-test-*/
 node_modules/
+.env

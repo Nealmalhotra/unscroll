@@ -2,8 +2,16 @@ import Foundation
 
 /// Locates the App Group container shared by the app and its Screen Time extensions.
 public enum SharedContainer {
-    /// Must match the App Group in every target's entitlements (see project.yml).
-    public static let appGroupID = "group.com.nealmalhotra.unscroll"
+    /// Info.plist key that carries the App Group from `Config/*.xcconfig` (APP_GROUP) into code.
+    public static let infoPlistKey = "UnscrollAppGroup"
+    static let fallbackAppGroupID = "group.org.unscroll"
+
+    /// The App Group configured at build time; every target's Info.plist and entitlements share it.
+    public static var appGroupID: String {
+        let configured = Bundle.main.object(forInfoDictionaryKey: infoPlistKey) as? String
+        guard let configured, !configured.isEmpty, !configured.contains("$(") else { return fallbackAppGroupID }
+        return configured
+    }
 
     /// Falls back to Application Support when the group isn't available (tests, previews, misconfigured signing).
     public static func directory(fileManager: FileManager = .default) -> URL {

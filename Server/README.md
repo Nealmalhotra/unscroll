@@ -13,17 +13,19 @@ It provides:
 
 ## Run
 
-Requires Node.js 22+ (developed on Node 25).
+Requires Node.js 22.9+ (developed on Node 25). No `npm install` needed: there are zero dependencies.
 
 ```sh
 cd Server
+cp .env.example .env           # optional: edit settings
 npm start                      # listens on :8787, data in ./data/db.json
-ADMIN_TOKEN=$(openssl rand -hex 32) PORT=8080 npm start
 npm test                       # run the test suite
 npm run coverage               # tests + coverage report
 ```
 
 ## Environment variables
+
+Set these in `.env` (loaded automatically by `npm start`) or in the environment. Real environment variables take precedence over `.env`.
 
 | Variable | Default | Description |
 |---|---|---|
