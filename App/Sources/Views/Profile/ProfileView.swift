@@ -36,9 +36,11 @@ struct ProfileView: View {
                         LabeledContent { Text(model.social.isConnected ? "Connected" : "Offline") } label: { Label("Social server", systemImage: "server.rack") }
                     }
                 }
-                Section {
-                    Link(destination: URL(string: "https://github.com/unscroll-app/unscroll")!) {
-                        Label("Unscroll is open source (MIT)", systemImage: "chevron.left.forwardslash.chevron.right")
+                if let repo = URL(string: "https://github.com/Nealmalhotra/unscroll") {
+                    Section {
+                        Link(destination: repo) {
+                            Label("Unscroll is open source (MIT)", systemImage: "chevron.left.forwardslash.chevron.right")
+                        }
                     }
                 }
             }
