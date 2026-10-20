@@ -62,7 +62,7 @@ open Unscroll.xcodeproj
 Screen Time blocking only works on a real device.
 
 1. In Xcode, select each of the 5 targets › *Signing & Capabilities* › choose your **Team** (or run `DEVELOPMENT_TEAM=ABCDE12345 xcodegen generate`).
-2. If the bundle IDs `org.unscroll.app*` are taken, change `bundleIdPrefix` and the `PRODUCT_BUNDLE_IDENTIFIER`s in `project.yml`, and the App Group `group.org.unscroll.shared` in `project.yml` **and** `SharedContainer.appGroupID`.
+2. If the bundle IDs `com.nealmalhotra.unscroll.app*` are taken, change `bundleIdPrefix` and the `PRODUCT_BUNDLE_IDENTIFIER`s in `project.yml`, and the App Group `group.com.nealmalhotra.unscroll` in `project.yml` **and** `SharedContainer.appGroupID`.
 3. The **Family Controls (Development)** capability works with any Apple Developer account for development builds. Distributing on the App Store requires requesting the Family Controls distribution entitlement from Apple.
 4. Select your iPhone and press Run. During onboarding, allow Screen Time access and choose **All Apps & Categories**.
 
@@ -72,7 +72,7 @@ Screen Time blocking only works on a real device.
 xcodebuild -project Unscroll.xcodeproj -scheme Unscroll \
   -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -derivedDataPath .build/dd build
 xcrun simctl install booted .build/dd/Build/Products/Debug-iphonesimulator/Unscroll.app
-xcrun simctl launch booted org.unscroll.app -demo -tab 0   # -demo seeds 2 weeks of history (Debug only)
+xcrun simctl launch booted com.nealmalhotra.unscroll.app -demo -tab 0   # -demo seeds 2 weeks of history (Debug only)
 ```
 
 The Simulator can't grant Family Controls, so blocking and usage reports are unavailable there. The onboarding lets you continue anyway.

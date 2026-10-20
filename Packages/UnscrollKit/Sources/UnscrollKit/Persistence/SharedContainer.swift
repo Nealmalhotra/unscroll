@@ -3,7 +3,7 @@ import Foundation
 /// Locates the App Group container shared by the app and its Screen Time extensions.
 public enum SharedContainer {
     /// Must match the App Group in every target's entitlements (see project.yml).
-    public static let appGroupID = "group.org.unscroll.shared"
+    public static let appGroupID = "group.com.nealmalhotra.unscroll"
 
     /// Falls back to Application Support when the group isn't available (tests, previews, misconfigured signing).
     public static func directory(fileManager: FileManager = .default) -> URL {

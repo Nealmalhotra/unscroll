@@ -1,6 +1,6 @@
 name: Unscroll
 options:
-  bundleIdPrefix: org.unscroll
+  bundleIdPrefix: com.nealmalhotra.unscroll
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
@@ -34,7 +34,7 @@ targets:
       path: App/Unscroll.entitlements
       properties:
         com.apple.developer.family-controls: true
-        com.apple.security.application-groups: [group.org.unscroll.shared]
+        com.apple.security.application-groups: [group.com.nealmalhotra.unscroll]
     info:
       path: App/Info.plist
       properties:
@@ -44,7 +44,7 @@ targets:
         ITSAppUsesNonExemptEncryption: false
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app
+        PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
 
@@ -61,7 +61,7 @@ targets:
       path: Extensions/Monitor/Monitor.entitlements
       properties:
         com.apple.developer.family-controls: true
-        com.apple.security.application-groups: [group.org.unscroll.shared]
+        com.apple.security.application-groups: [group.com.nealmalhotra.unscroll]
     info:
       path: Extensions/Monitor/Info.plist
       properties:
@@ -71,7 +71,7 @@ targets:
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).MonitorExtension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.monitor
+        PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app.monitor
 
   UnscrollShieldConfiguration:
     type: app-extension
@@ -86,7 +86,7 @@ targets:
       path: Extensions/ShieldConfiguration/ShieldConfiguration.entitlements
       properties:
         com.apple.developer.family-controls: true
-        com.apple.security.application-groups: [group.org.unscroll.shared]
+        com.apple.security.application-groups: [group.com.nealmalhotra.unscroll]
     info:
       path: Extensions/ShieldConfiguration/Info.plist
       properties:
@@ -96,7 +96,7 @@ targets:
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldConfigurationExtension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.shieldconfiguration
+        PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app.shieldconfiguration
 
   UnscrollShieldAction:
     type: app-extension
@@ -111,7 +111,7 @@ targets:
       path: Extensions/ShieldAction/ShieldAction.entitlements
       properties:
         com.apple.developer.family-controls: true
-        com.apple.security.application-groups: [group.org.unscroll.shared]
+        com.apple.security.application-groups: [group.com.nealmalhotra.unscroll]
     info:
       path: Extensions/ShieldAction/Info.plist
       properties:
@@ -121,7 +121,7 @@ targets:
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldActionExtension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.shieldaction
+        PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app.shieldaction
 
   UnscrollReport:
     type: extensionkit-extension
@@ -134,7 +134,7 @@ targets:
       path: Extensions/Report/Report.entitlements
       properties:
         com.apple.developer.family-controls: true
-        com.apple.security.application-groups: [group.org.unscroll.shared]
+        com.apple.security.application-groups: [group.com.nealmalhotra.unscroll]
     info:
       path: Extensions/Report/Info.plist
       properties:
@@ -143,7 +143,7 @@ targets:
           EXExtensionPointIdentifier: com.apple.deviceactivityui.report-extension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: org.unscroll.app.report
+        PRODUCT_BUNDLE_IDENTIFIER: com.nealmalhotra.unscroll.app.report
         # Apple's DeviceActivityReportScene isn't Swift 6 concurrency-clean yet.
         SWIFT_VERSION: "5.0"
 
